@@ -4,7 +4,7 @@
 `$ virtualenv env`
 
 ## Entrar na env
-`$ source env/bin/active`
+`$ source env/bin/activate`
 
 ## Intalar dependências
 `$ pip install django`
@@ -16,4 +16,4 @@
 `$ pip install django-filter`
 
 ## Rodar o back
-`$ pyhton manage.py runserve`
+`$ python manage.py runserver`
