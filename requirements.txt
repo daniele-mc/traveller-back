@@ -1,6 +1,5 @@
 asgiref==3.5.0
 autopep8==1.6.0
-btrfsutil==5.16
 CacheControl==0.12.6
 cffi==1.15.0
 chardet==4.0.0
