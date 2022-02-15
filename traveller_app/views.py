@@ -110,7 +110,7 @@ class CreateTravelView(APIView):
         new_data = {
             **request.data,
             "user": request.user.id,
-            "active": True
+            "active": False
         }
         data_serializer = TravelSerializer(data=new_data)
 
@@ -156,15 +156,34 @@ class TravelView(APIView):
         return Response(status=204)
 
 
+class DeleteTravelByIdView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, *args, **kwargs):
+        travel = Travel.objects.get(id=kwargs['id'])
+
+        travel.delete()
+        return Response(status=204)
+
+
 class TravelInactiveView(APIView):
     permission_classes = [IsAuthenticated]
 
     def patch(self, request, *args, **kwargs):
-        print(request)
-        travels = Travel.objects.filter(user=request.user, active=True)
-        travel = travels.first()
+        travel = Travel.objects.get(id=kwargs['id'])
 
         travel.active = False
+        travel.save()
+        return Response(status=201)
+
+
+class TravelActiveView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, *args, **kwargs):
+        travel = Travel.objects.get(id=kwargs['id'])
+
+        travel.active = True
         travel.save()
         return Response(status=201)
 
